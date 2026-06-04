@@ -3,7 +3,6 @@
 
   <xacro:arg name="namespace" default=""/>
   <xacro:property name="ns" value="$(arg namespace)"/>
-  
   <xacro:property name="payload_mass" value="2000.0"/>
 
   <link name="base_link">
@@ -27,6 +26,7 @@
       <geometry><box size="7.5 1.3 0.15"/></geometry>
     </collision>
     <inertial>
+      <origin xyz="0 0 -0.5" rpy="0 0 0"/>
       <mass value="500.0"/>
       <inertia ixx="71.0" ixy="0.0" ixz="0.0" iyy="2344.0" iyz="0.0" izz="2414.0"/>
     </inertial>
@@ -43,6 +43,7 @@
       <geometry><box size="7.0 1.5 2.5"/></geometry>
     </collision>
     <inertial>
+      <origin xyz="0 0 -1.5" rpy="0 0 0"/>
       <mass value="${payload_mass}"/>
       <inertia 
         ixx="${(payload_mass/12.0) * (1.5*1.5 + 2.5*2.5)}" 
@@ -113,7 +114,6 @@
 
   <xacro:drive_wheel prefix="drive_left" y_offset="0.45"/>
   <xacro:drive_wheel prefix="drive_right" y_offset="-0.45"/>
-  
   <xacro:caster_wheel prefix="front_left" x_offset="3.0" y_offset="0.45"/>
   <xacro:caster_wheel prefix="front_right" x_offset="3.0" y_offset="-0.45"/>
   <xacro:caster_wheel prefix="rear_left" x_offset="-3.0" y_offset="0.45"/>
@@ -135,7 +135,7 @@
     <sensor name="camera" type="camera">
       <update_rate>10.0</update_rate>
       <camera>
-        <horizontal_fov>2.0</horizontal_fov>
+        <horizontal_fov>2.5</horizontal_fov>
         <image>
           <width>160</width>
           <height>120</height>
@@ -152,6 +152,8 @@
       <wheel_separation>0.9</wheel_separation>
       <wheel_radius>0.2</wheel_radius>
       <topic>/${ns}/cmd_vel</topic>
+      <max_linear_acceleration>10.0</max_linear_acceleration>
+      <max_angular_acceleration>20.0</max_angular_acceleration>
     </plugin>
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <topic>/${ns}/joint_states</topic>

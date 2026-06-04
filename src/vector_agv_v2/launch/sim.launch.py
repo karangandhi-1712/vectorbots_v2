@@ -4,7 +4,8 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-import xacro
+from launch.substitutions import Command
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     pkg_share = get_package_share_directory('vector_agv_v2')
@@ -18,22 +19,35 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')
         ),
-        launch_arguments={'gz_args': f'-r {world_file}'}.items()
+        launch_arguments=[('gz_args', f'-r {world_file}')] 
     )
     ld.add_action(gz_sim)
 
     # 2. Setup States and Bridges for 20 bots
     bridge_args = ['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock']
     
-    for i in range(2):
+    for i in range(20):
         ns = f"agv_{i+1:02d}"
-        doc = xacro.process_file(xacro_file, mappings={'namespace': ns})
+        
+        # NON-BLOCKING XACRO COMMAND (Crash-Proof)
+        robot_desc = ParameterValue(
+            Command(['xacro ', xacro_file, ' namespace:=', ns]),
+            value_type=str
+        )
         
         rsp = Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             namespace=ns,
-            parameters=[{'robot_description': doc.toxml(), 'frame_prefix': f"{ns}/"}]
+            parameters=[{
+                'robot_description': robot_desc, 
+                'frame_prefix': f"{ns}/",
+                'use_sim_time': True
+            }],
+            remappings=[
+                ('/tf', '/tf'),
+                ('/tf_static', '/tf_static')
+            ]
         )
         ld.add_action(rsp)
 
@@ -43,7 +57,8 @@ def generate_launch_description():
     bridge_node = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=bridge_args
+        arguments=bridge_args,
+        parameters=[{'use_sim_time': True}]
     )
     ld.add_action(bridge_node)
 
