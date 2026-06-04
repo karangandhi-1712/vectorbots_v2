@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
-
+from rclpy.qos import qos_profile_sensor_data
 class SingleBotBrain(Node):
     def __init__(self):
         super().__init__('agv_01_brain')
@@ -15,7 +15,7 @@ class SingleBotBrain(Node):
         self.ns = 'agv_01'
         self.bridge = CvBridge()
         self.pub = self.create_publisher(Twist, f'/{self.ns}/cmd_vel', 10)
-        self.sub = self.create_subscription(Image, f'/{self.ns}/camera/image_raw', self.image_cb, 10)
+        self.sub = self.create_subscription(Image, f'/{self.ns}/camera/image_raw', self.image_cb, qos_profile_sensor_data)
         
         # --- STATE MACHINE VARIABLES ---
         self.state = 'FOLLOWING' 
@@ -80,14 +80,17 @@ class SingleBotBrain(Node):
             center_x = np.mean(line_pixels)
             error = center_x - (w / 2.0)
             
-            # POLARITY LOCK: 
-            # If the robot steers AWAY from the line, change -0.015 to 0.015
-            kp = -0.015 
+            # 1. TIGHTER TURNS: Increased from 0.015
+            # NOTE: If your robot was previously using a negative sign (e.g., -0.015), 
+            # make sure this is -0.025! Keep whichever sign worked for the U-Turn.
+            kp = 0.025 
             
-            twist.linear.x = 0.3
-            twist.angular.z = float(np.clip(kp * error, -0.4, 0.4))
-
-        self.pub.publish(twist)
+            # 2. HIGHER STEERING LIMIT: Increased cap from 0.4 to 0.6 for sharper cornering
+            twist.angular.z = float(np.clip(kp * error, -0.6, 0.6))
+            
+            # 3. DYNAMIC BRAKING: Go 0.35 on straights, but hit the brakes down to 0.15 on sharp turns
+            twist.linear.x = float(np.clip(0.35 - abs(twist.angular.z), 0.15, 0.35))
+            
 
 def main(args=None):
     rclpy.init(args=args)

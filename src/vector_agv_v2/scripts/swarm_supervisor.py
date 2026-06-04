@@ -10,22 +10,25 @@ class SwarmSupervisor(Node):
         self.get_logger().info("Swarm Supervisor online. Giving Gazebo 10 seconds to fully compile shaders...")
         time.sleep(10.0)
         
-        # Hardcoded track coordinates
-        poses = []
-        for i in range(12): poses.append((-82.5 + (i * 15.0), -10.0, 0.0))
-        poses.extend([
-            (98.55, 5.18, 2.116), (71.62, 10.0, 3.141), (43.0, 10.0, 3.141),
-            (14.4, 10.0, 3.141), (-14.3, 10.0, 3.141), (-42.9, 10.0, 3.141),
-            (-71.6, 10.0, 3.141), (-98.5, 5.2, -2.122)
-        ])
-
+        # --- COMMENTED OUT FOR ISOLATED TESTING ---
+        # poses = []
+        # for i in range(12): poses.append((-82.5 + (i * 15.0), -10.0, 0.0))
+        # poses.extend([
+        #     (98.55, 5.18, 2.116), (71.62, 10.0, 3.141), (43.0, 10.0, 3.141),
+        #     (14.4, 10.0, 3.141), (-14.3, 10.0, 3.141), (-42.9, 10.0, 3.141),
+        #     (-71.6, 10.0, 3.141), (-98.5, 5.2, -2.122)
+        # ])
+        #
         # Sequential Deployment Loop
-        for i in range(20):
-            ns = f"agv_{i+1:02d}"
-            x, y, yaw = poses[i]
-            self.spawn_and_verify(ns, x, y, yaw)
-        
-        self.get_logger().info(">>> FLEET DEPLOYMENT COMPLETE. ALL 20 AGVS VERIFIED AND ONLINE. <<<")
+        # for i in range(1):
+        #     ns = f"agv_{i+1:02d}"
+        #     x, y, yaw = poses[i]
+        #     self.spawn_and_verify(ns, x, y, yaw)
+        # ------------------------------------------
+
+        # --- NEW SHORTCUT: SPAWN EXACTLY AT STATION 11 ---
+        self.get_logger().info(">>> SHORTCUT DEPLOYMENT: Spawning AGV_01 at Station 11 <<<")
+        self.spawn_and_verify("agv_01", 67.5, -10.0, 0.0)
 
     def spawn_and_verify(self, ns, x, y, yaw):
         attempt = 1

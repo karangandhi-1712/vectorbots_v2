@@ -25,7 +25,7 @@ def generate_launch_description():
     # 2. Setup States and Bridges for 20 bots
     bridge_args = ['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock']
     
-    for i in range(20):
+    for i in range(2):
         ns = f"agv_{i+1:02d}"
         doc = xacro.process_file(xacro_file, mappings={'namespace': ns})
         
