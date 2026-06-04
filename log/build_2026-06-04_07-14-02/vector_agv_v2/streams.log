@@ -1,0 +1,52 @@
+[0.010s] Invoking command in '/home/karan/vector_ws_corrected/build/vector_agv_v2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/karan/vector_ws_corrected/src/vector_agv_v2 -DCMAKE_INSTALL_PREFIX=/home/karan/vector_ws_corrected/install/vector_agv_v2
+[0.112s] -- The C compiler identification is GNU 13.3.0
+[0.189s] -- The CXX compiler identification is GNU 13.3.0
+[0.209s] -- Detecting C compiler ABI info
+[0.308s] -- Detecting C compiler ABI info - done
+[0.316s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.316s] -- Detecting C compile features
+[0.317s] -- Detecting C compile features - done
+[0.327s] -- Detecting CXX compiler ABI info
+[0.422s] -- Detecting CXX compiler ABI info - done
+[0.430s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.430s] -- Detecting CXX compile features
+[0.431s] -- Detecting CXX compile features - done
+[0.441s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.585s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.720s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[0.842s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.842s] -- Configured 'flake8' exclude dirs and/or files: 
+[0.843s] -- Added test 'lint_cmake' to check CMake code style
+[0.845s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.847s] -- Added test 'xmllint' to check XML markup files
+[0.850s] -- Configuring done (0.8s)
+[0.853s] -- Generating done (0.0s)
+[0.855s] -- Build files have been written to: /home/karan/vector_ws_corrected/build/vector_agv_v2
+[0.860s] Invoked command in '/home/karan/vector_ws_corrected/build/vector_agv_v2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/karan/vector_ws_corrected/src/vector_agv_v2 -DCMAKE_INSTALL_PREFIX=/home/karan/vector_ws_corrected/install/vector_agv_v2
+[0.861s] Invoking command in '/home/karan/vector_ws_corrected/build/vector_agv_v2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/karan/vector_ws_corrected/build/vector_agv_v2 -- -j12 -l12
+[0.900s] Invoked command in '/home/karan/vector_ws_corrected/build/vector_agv_v2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/karan/vector_ws_corrected/build/vector_agv_v2 -- -j12 -l12
+[0.911s] Invoking command in '/home/karan/vector_ws_corrected/build/vector_agv_v2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/karan/vector_ws_corrected/build/vector_agv_v2
+[0.919s] -- Install configuration: ""
+[0.919s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/launch
+[0.919s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/launch/launch.sim.py
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/urdf
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/urdf/vector_v2.urdf.xacro
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/worlds
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/worlds/stadium.sdf
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/lib/vector_agv_v2/fleet_brain.py
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/ament_index/resource_index/package_run_dependencies/vector_agv_v2
+[0.920s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/ament_index/resource_index/parent_prefix_path/vector_agv_v2
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/environment/ament_prefix_path.sh
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/environment/ament_prefix_path.dsv
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/environment/path.sh
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/environment/path.dsv
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/local_setup.bash
+[0.921s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/local_setup.sh
+[0.922s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/local_setup.zsh
+[0.922s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/local_setup.dsv
+[0.922s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/package.dsv
+[0.922s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/ament_index/resource_index/packages/vector_agv_v2
+[0.922s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/cmake/vector_agv_v2Config.cmake
+[0.923s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/cmake/vector_agv_v2Config-version.cmake
+[0.923s] -- Installing: /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/package.xml
+[0.924s] Invoked command in '/home/karan/vector_ws_corrected/build/vector_agv_v2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/karan/vector_ws_corrected/build/vector_agv_v2

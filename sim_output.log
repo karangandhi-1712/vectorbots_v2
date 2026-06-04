@@ -1,0 +1,253 @@
+[INFO] [launch]: All log files can be found below /home/karan/.ros/log/2026-06-04-07-40-25-549377-UbuntuVictus-16673
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [16676]
+[INFO] [robot_state_publisher-2]: process started with pid [16677]
+[INFO] [create-3]: process started with pid [16678]
+[INFO] [robot_state_publisher-4]: process started with pid [16680]
+[INFO] [create-5]: process started with pid [16681]
+[INFO] [robot_state_publisher-6]: process started with pid [16682]
+[INFO] [create-7]: process started with pid [16683]
+[INFO] [robot_state_publisher-8]: process started with pid [16684]
+[INFO] [create-9]: process started with pid [16685]
+[INFO] [robot_state_publisher-10]: process started with pid [16686]
+[INFO] [create-11]: process started with pid [16687]
+[INFO] [robot_state_publisher-12]: process started with pid [16688]
+[INFO] [create-13]: process started with pid [16689]
+[INFO] [robot_state_publisher-14]: process started with pid [16690]
+[INFO] [create-15]: process started with pid [16691]
+[INFO] [robot_state_publisher-16]: process started with pid [16692]
+[INFO] [create-17]: process started with pid [16693]
+[INFO] [robot_state_publisher-18]: process started with pid [16694]
+[INFO] [create-19]: process started with pid [16703]
+[INFO] [robot_state_publisher-20]: process started with pid [16704]
+[INFO] [create-21]: process started with pid [16705]
+[INFO] [robot_state_publisher-22]: process started with pid [16716]
+[INFO] [create-23]: process started with pid [16721]
+[INFO] [robot_state_publisher-24]: process started with pid [16736]
+[INFO] [create-25]: process started with pid [16740]
+[INFO] [robot_state_publisher-26]: process started with pid [16758]
+[INFO] [create-27]: process started with pid [16761]
+[INFO] [robot_state_publisher-28]: process started with pid [16763]
+[INFO] [create-29]: process started with pid [16772]
+[INFO] [robot_state_publisher-30]: process started with pid [16779]
+[INFO] [create-31]: process started with pid [16780]
+[INFO] [robot_state_publisher-32]: process started with pid [16783]
+[INFO] [create-33]: process started with pid [16785]
+[INFO] [robot_state_publisher-34]: process started with pid [16792]
+[INFO] [create-35]: process started with pid [16794]
+[INFO] [robot_state_publisher-36]: process started with pid [16799]
+[INFO] [create-37]: process started with pid [16804]
+[INFO] [robot_state_publisher-38]: process started with pid [16825]
+[INFO] [create-39]: process started with pid [16827]
+[INFO] [robot_state_publisher-40]: process started with pid [16830]
+[INFO] [create-41]: process started with pid [16834]
+[INFO] [parameter_bridge-42]: process started with pid [16841]
+[robot_state_publisher-10] [WARN] [1780539026.316267982] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-10] [INFO] [1780539026.316399410] [agv_05.robot_state_publisher]: Robot initialized
+[create-7] [INFO] [1780539026.318940924] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-2] [WARN] [1780539026.319875240] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-2] [INFO] [1780539026.320004344] [agv_01.robot_state_publisher]: Robot initialized
+[robot_state_publisher-4] [WARN] [1780539026.331934326] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-4] [INFO] [1780539026.332067377] [agv_02.robot_state_publisher]: Robot initialized
+[robot_state_publisher-12] [WARN] [1780539026.352927767] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-12] [INFO] [1780539026.353032953] [agv_06.robot_state_publisher]: Robot initialized
+[gazebo-1] qt.qpa.xcb: could not connect to display 
+[gazebo-1] qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+[gazebo-1] This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+[gazebo-1] 
+[gazebo-1] Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, xcb.
+[gazebo-1] 
+[gazebo-1] Stack trace (most recent call last):
+[gazebo-1] #31   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f18b9152, in ruby_run_node
+[gazebo-1] #30   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f18b4e2b, in 
+[gazebo-1] #29   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a57b49, in rb_vm_exec
+[gazebo-1] #28   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a5462b, in 
+[gazebo-1] #27   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a5013e, in 
+[gazebo-1] #26   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a4d92f, in 
+[gazebo-1] #25   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f198e049, in 
+[gazebo-1] #24   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f18b71d6, in rb_protect
+[gazebo-1] #23   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a5c2d9, in rb_yield
+[gazebo-1] #22   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a57b49, in rb_vm_exec
+[gazebo-1] #21   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a5462b, in 
+[gazebo-1] #20   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a5013e, in 
+[gazebo-1] #19   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a4d92f, in 
+[gazebo-1] #18   Object "/usr/lib/x86_64-linux-gnu/ruby/3.2.0/fiddle.so", at 0x7b95ebeb7b13, in 
+[gazebo-1] #17   Object "/lib/x86_64-linux-gnu/libruby-3.2.so.3.2", at 0x7b95f1a1637b, in rb_nogvl
+[gazebo-1] #16   Object "/usr/lib/x86_64-linux-gnu/ruby/3.2.0/fiddle.so", at 0x7b95ebeb743b, in 
+[gazebo-1] #15   Object "/lib/x86_64-linux-gnu/libffi.so.8", at 0x7b95f12fa0bd, in ffi_call
+[gazebo-1] #14   Object "/lib/x86_64-linux-gnu/libffi.so.8", at 0x7b95f12f73ee, in 
+[gazebo-1] #13   Object "/lib/x86_64-linux-gnu/libffi.so.8", at 0x7b95f12fab15, in 
+[gazebo-1] #12   Object "/opt/ros/jazzy/opt/gz_sim_vendor/lib/libgz-sim8-gz.so.8.11.0", at 0x7b95ebd1fdb2, in runGui
+[gazebo-1] #11   Object "/opt/ros/jazzy/opt/gz_sim_vendor/lib/libgz-sim8-gui.so.8", at 0x7b95eae7933c, in gz::sim::v8::gui::runGui(int&, char**, char const*, char const*, int, char const*, char const*)
+[gazebo-1] #10   Object "/opt/ros/jazzy/opt/gz_sim_vendor/lib/libgz-sim8-gui.so.8", at 0x7b95eae766d9, in gz::sim::v8::gui::createGui(int&, char**, char const*, char const*, bool, char const*, int, char const*, char const*)
+[gazebo-1] #9    Object "/opt/ros/jazzy/opt/gz_gui_vendor/lib/libgz-gui8.so.8", at 0x7b95ead98fdc, in gz::gui::Application::Application(int&, char**, gz::gui::WindowType, char const*)
+[gazebo-1] #8    Object "/lib/x86_64-linux-gnu/libQt5Widgets.so.5", at 0x7b95e91715b4, in QApplicationPrivate::init()
+[gazebo-1] #7    Object "/lib/x86_64-linux-gnu/libQt5Gui.so.5", at 0x7b95e7d3fb9e, in QGuiApplicationPrivate::init()
+[gazebo-1] #6    Object "/lib/x86_64-linux-gnu/libQt5Core.so.5", at 0x7b95e9adeff4, in QCoreApplicationPrivate::init()
+[gazebo-1] #5    Object "/lib/x86_64-linux-gnu/libQt5Gui.so.5", at 0x7b95e7d3cc1f, in QGuiApplicationPrivate::createEventDispatcher()
+[gazebo-1] #4    Object "/lib/x86_64-linux-gnu/libQt5Gui.so.5", at 0x7b95e7d3c6dc, in QGuiApplicationPrivate::createPlatformIntegration()
+[gazebo-1] #3    Object "/lib/x86_64-linux-gnu/libQt5Core.so.5", at 0x7b95e9891103, in QMessageLogger::fatal(char const*, ...) const
+[gazebo-1] #2    Object "/lib/x86_64-linux-gnu/libc.so.6", at 0x7b95f14288fe, in abort
+[gazebo-1] #1    Object "/lib/x86_64-linux-gnu/libc.so.6", at 0x7b95f144527d, in gsignal
+[gazebo-1] #0    Object "/lib/x86_64-linux-gnu/libc.so.6", at 0x7b95f149eb2c, in pthread_kill
+[gazebo-1] Aborted (Signal sent by tkill() 17195 1000)
+[robot_state_publisher-8] [WARN] [1780539026.816905872] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-8] [INFO] [1780539026.818773242] [agv_04.robot_state_publisher]: Robot initialized
+[create-9] [INFO] [1780539026.857122536] [ros_gz_sim]: Requesting list of world names.
+[create-21] [INFO] [1780539026.986326246] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-14] [WARN] [1780539027.043360938] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-14] [INFO] [1780539027.044214415] [agv_07.robot_state_publisher]: Robot initialized
+[robot_state_publisher-22] [WARN] [1780539027.093724292] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-22] [INFO] [1780539027.093994202] [agv_11.robot_state_publisher]: Robot initialized
+[create-5] [INFO] [1780539027.097553326] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-16] [WARN] [1780539027.192635873] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-16] [INFO] [1780539027.193365376] [agv_08.robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1780539027.212739276] [ros_gz_sim]: Requesting list of world names.
+[create-15] [INFO] [1780539027.301867323] [ros_gz_sim]: Requesting list of world names.
+[create-7] [INFO] [1780539027.338537770] [ros_gz_sim]: Waiting messages on topic [/agv_03/robot_description].
+[create-9] [INFO] [1780539027.395112159] [ros_gz_sim]: Waiting messages on topic [/agv_04/robot_description].
+[create-17] [INFO] [1780539027.445961838] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-20] [WARN] [1780539027.460156611] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-20] [INFO] [1780539027.460798482] [agv_10.robot_state_publisher]: Robot initialized
+[robot_state_publisher-38] [WARN] [1780539027.477030017] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-38] [INFO] [1780539027.477163028] [agv_19.robot_state_publisher]: Robot initialized
+[robot_state_publisher-36] [WARN] [1780539027.510633488] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-36] [INFO] [1780539027.510781819] [agv_18.robot_state_publisher]: Robot initialized
+[create-5] [INFO] [1780539027.514562839] [ros_gz_sim]: Waiting messages on topic [/agv_02/robot_description].
+[create-21] [INFO] [1780539027.593548315] [ros_gz_sim]: Waiting messages on topic [/agv_10/robot_description].
+[robot_state_publisher-18] [WARN] [1780539027.621337531] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-18] [INFO] [1780539027.621554988] [agv_09.robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1780539027.726676482] [ros_gz_sim]: Waiting messages on topic [/agv_01/robot_description].
+[create-29] [INFO] [1780539027.796460377] [ros_gz_sim]: Requesting list of world names.
+[create-17] [INFO] [1780539027.803210691] [ros_gz_sim]: Waiting messages on topic [/agv_08/robot_description].
+[create-13] [INFO] [1780539027.828192721] [ros_gz_sim]: Requesting list of world names.
+[create-21] [INFO] [1780539027.891950425] [ros_gz_sim]: Entity creation successful.
+[create-11] [INFO] [1780539027.910180797] [ros_gz_sim]: Requesting list of world names.
+[create-33] [INFO] [1780539027.937825319] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-28] [WARN] [1780539027.950507409] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-28] [INFO] [1780539027.950672293] [agv_14.robot_state_publisher]: Robot initialized
+[robot_state_publisher-6] [WARN] [1780539027.956308618] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-6] [INFO] [1780539027.956800685] [agv_03.robot_state_publisher]: Robot initialized
+[create-15] [INFO] [1780539027.973015127] [ros_gz_sim]: Waiting messages on topic [/agv_07/robot_description].
+[create-39] [INFO] [1780539027.984489173] [ros_gz_sim]: Requesting list of world names.
+[create-29] [INFO] [1780539028.025653041] [ros_gz_sim]: Waiting messages on topic [/agv_14/robot_description].
+[robot_state_publisher-26] [WARN] [1780539028.025891960] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-26] [INFO] [1780539028.026030413] [agv_13.robot_state_publisher]: Robot initialized
+[create-23] [INFO] [1780539028.045598034] [ros_gz_sim]: Requesting list of world names.
+[create-31] [INFO] [1780539028.053091589] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-40] [WARN] [1780539028.097765305] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-40] [INFO] [1780539028.098470761] [agv_20.robot_state_publisher]: Robot initialized
+[create-19] [INFO] [1780539028.101855662] [ros_gz_sim]: Requesting list of world names.
+[create-25] [INFO] [1780539028.110717857] [ros_gz_sim]: Requesting list of world names.
+[create-35] [INFO] [1780539028.120967267] [ros_gz_sim]: Requesting list of world names.
+[parameter_bridge-42] [INFO] [1780539028.161636043] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[create-13] [INFO] [1780539028.215648560] [ros_gz_sim]: Waiting messages on topic [/agv_06/robot_description].
+[parameter_bridge-42] [INFO] [1780539028.215892048] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_01/cmd_vel (geometry_msgs/msg/Twist) -> /agv_01/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[create-39] [INFO] [1780539028.217597419] [ros_gz_sim]: Waiting messages on topic [/agv_19/robot_description].
+[create-37] [INFO] [1780539028.250841696] [ros_gz_sim]: Requesting list of world names.
+[create-27] [INFO] [1780539028.254347806] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-34] [WARN] [1780539028.258225295] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-34] [INFO] [1780539028.258391772] [agv_17.robot_state_publisher]: Robot initialized
+[parameter_bridge-42] [INFO] [1780539028.259062470] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_01/camera/image_raw (gz.msgs.Image) -> /agv_01/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[robot_state_publisher-24] [WARN] [1780539028.272926393] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-24] [INFO] [1780539028.273987438] [agv_12.robot_state_publisher]: Robot initialized
+[INFO] [create-21]: process has finished cleanly [pid 16705]
+[parameter_bridge-42] [INFO] [1780539028.321073113] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_02/cmd_vel (geometry_msgs/msg/Twist) -> /agv_02/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.337941721] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_02/camera/image_raw (gz.msgs.Image) -> /agv_02/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.343897985] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_03/cmd_vel (geometry_msgs/msg/Twist) -> /agv_03/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[create-7] [INFO] [1780539028.344707196] [ros_gz_sim]: Waiting messages on topic [/agv_03/robot_description].
+[create-41] [INFO] [1780539028.363846385] [ros_gz_sim]: Requesting list of world names.
+[parameter_bridge-42] [INFO] [1780539028.370329454] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_03/camera/image_raw (gz.msgs.Image) -> /agv_03/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[create-11] [INFO] [1780539028.372074243] [ros_gz_sim]: Waiting messages on topic [/agv_05/robot_description].
+[create-9] [INFO] [1780539028.397703415] [ros_gz_sim]: Waiting messages on topic [/agv_04/robot_description].
+[create-35] [INFO] [1780539028.425921505] [ros_gz_sim]: Waiting messages on topic [/agv_17/robot_description].
+[robot_state_publisher-30] [WARN] [1780539028.478397643] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-30] [INFO] [1780539028.478580632] [agv_15.robot_state_publisher]: Robot initialized
+[robot_state_publisher-32] [WARN] [1780539028.479986345] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-32] [INFO] [1780539028.480138594] [agv_16.robot_state_publisher]: Robot initialized
+[create-33] [INFO] [1780539028.508416361] [ros_gz_sim]: Waiting messages on topic [/agv_16/robot_description].
+[parameter_bridge-42] [INFO] [1780539028.658294447] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_04/cmd_vel (geometry_msgs/msg/Twist) -> /agv_04/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.682499852] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_04/camera/image_raw (gz.msgs.Image) -> /agv_04/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.692292655] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_05/cmd_vel (geometry_msgs/msg/Twist) -> /agv_05/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.696173341] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_05/camera/image_raw (gz.msgs.Image) -> /agv_05/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.701898611] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_06/cmd_vel (geometry_msgs/msg/Twist) -> /agv_06/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539028.733445542] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_06/camera/image_raw (gz.msgs.Image) -> /agv_06/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[create-15] [INFO] [1780539028.811687220] [ros_gz_sim]: Entity creation successful.
+[create-9] [INFO] [1780539028.812051145] [ros_gz_sim]: Entity creation successful.
+[create-23] [INFO] [1780539028.830343651] [ros_gz_sim]: Waiting messages on topic [/agv_11/robot_description].
+[create-3] [INFO] [1780539028.921644020] [ros_gz_sim]: Entity creation successful.
+[create-17] [INFO] [1780539028.926625709] [ros_gz_sim]: Entity creation successful.
+[create-19] [INFO] [1780539028.946446197] [ros_gz_sim]: Waiting messages on topic [/agv_09/robot_description].
+[create-31] [INFO] [1780539028.947887429] [ros_gz_sim]: Waiting messages on topic [/agv_15/robot_description].
+[parameter_bridge-42] [INFO] [1780539028.988875322] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_07/cmd_vel (geometry_msgs/msg/Twist) -> /agv_07/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[create-5] [INFO] [1780539029.011052632] [ros_gz_sim]: Entity creation successful.
+[create-29] [INFO] [1780539029.026397717] [ros_gz_sim]: Waiting messages on topic [/agv_14/robot_description].
+[create-37] [INFO] [1780539029.097050134] [ros_gz_sim]: Waiting messages on topic [/agv_18/robot_description].
+[parameter_bridge-42] [INFO] [1780539029.138023000] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_07/camera/image_raw (gz.msgs.Image) -> /agv_07/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[create-25] [INFO] [1780539029.152395352] [ros_gz_sim]: Waiting messages on topic [/agv_12/robot_description].
+[create-27] [INFO] [1780539029.157618196] [ros_gz_sim]: Waiting messages on topic [/agv_13/robot_description].
+[parameter_bridge-42] [INFO] [1780539029.165921102] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_08/cmd_vel (geometry_msgs/msg/Twist) -> /agv_08/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[INFO] [create-15]: process has finished cleanly [pid 16691]
+[parameter_bridge-42] [INFO] [1780539029.207931385] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_08/camera/image_raw (gz.msgs.Image) -> /agv_08/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[create-13] [INFO] [1780539029.215955864] [ros_gz_sim]: Waiting messages on topic [/agv_06/robot_description].
+[create-37] [INFO] [1780539029.219609825] [ros_gz_sim]: Entity creation successful.
+[create-19] [INFO] [1780539029.219706004] [ros_gz_sim]: Entity creation successful.
+[create-35] [INFO] [1780539029.219749549] [ros_gz_sim]: Entity creation successful.
+[create-39] [INFO] [1780539029.219939222] [ros_gz_sim]: Entity creation successful.
+[create-31] [INFO] [1780539029.220033687] [ros_gz_sim]: Entity creation successful.
+[create-33] [INFO] [1780539029.220198942] [ros_gz_sim]: Entity creation successful.
+[create-41] [INFO] [1780539029.279572256] [ros_gz_sim]: Waiting messages on topic [/agv_20/robot_description].
+[create-7] [INFO] [1780539029.346740166] [ros_gz_sim]: Waiting messages on topic [/agv_03/robot_description].
+[INFO] [create-9]: process has finished cleanly [pid 16685]
+[create-11] [INFO] [1780539029.373571592] [ros_gz_sim]: Waiting messages on topic [/agv_05/robot_description].
+[INFO] [create-3]: process has finished cleanly [pid 16678]
+[create-41] [INFO] [1780539029.378667997] [ros_gz_sim]: Entity creation successful.
+[create-23] [INFO] [1780539029.388016478] [ros_gz_sim]: Entity creation successful.
+[create-27] [INFO] [1780539029.429135149] [ros_gz_sim]: Entity creation successful.
+[create-25] [INFO] [1780539029.503163581] [ros_gz_sim]: Entity creation successful.
+[create-29] [INFO] [1780539029.580272998] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-17]: process has finished cleanly [pid 16693]
+[create-13] [INFO] [1780539029.719245992] [ros_gz_sim]: Entity creation successful.
+[create-7] [INFO] [1780539029.815212744] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-39]: process has finished cleanly [pid 16827]
+[INFO] [create-35]: process has finished cleanly [pid 16794]
+[INFO] [create-19]: process has finished cleanly [pid 16703]
+[parameter_bridge-42] [INFO] [1780539030.017660752] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_09/cmd_vel (geometry_msgs/msg/Twist) -> /agv_09/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[INFO] [create-37]: process has finished cleanly [pid 16804]
+[INFO] [create-31]: process has finished cleanly [pid 16780]
+[INFO] [create-27]: process has finished cleanly [pid 16761]
+[INFO] [create-41]: process has finished cleanly [pid 16834]
+[create-11] [INFO] [1780539030.187376355] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-23]: process has finished cleanly [pid 16721]
+[INFO] [create-33]: process has finished cleanly [pid 16785]
+[INFO] [create-7]: process has finished cleanly [pid 16683]
+[INFO] [create-29]: process has finished cleanly [pid 16772]
+[INFO] [create-25]: process has finished cleanly [pid 16740]
+[INFO] [create-13]: process has finished cleanly [pid 16689]
+[parameter_bridge-42] [INFO] [1780539030.362254212] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_09/camera/image_raw (gz.msgs.Image) -> /agv_09/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[INFO] [create-5]: process has finished cleanly [pid 16681]
+[INFO] [create-11]: process has finished cleanly [pid 16687]
+[parameter_bridge-42] [INFO] [1780539030.427345114] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_10/cmd_vel (geometry_msgs/msg/Twist) -> /agv_10/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.473287647] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_10/camera/image_raw (gz.msgs.Image) -> /agv_10/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.519207184] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_11/cmd_vel (geometry_msgs/msg/Twist) -> /agv_11/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.522100650] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_11/camera/image_raw (gz.msgs.Image) -> /agv_11/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.538495538] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_12/cmd_vel (geometry_msgs/msg/Twist) -> /agv_12/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.541664656] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_12/camera/image_raw (gz.msgs.Image) -> /agv_12/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.547169704] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_13/cmd_vel (geometry_msgs/msg/Twist) -> /agv_13/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.757829578] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_13/camera/image_raw (gz.msgs.Image) -> /agv_13/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.824994736] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_14/cmd_vel (geometry_msgs/msg/Twist) -> /agv_14/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.935289639] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_14/camera/image_raw (gz.msgs.Image) -> /agv_14/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539030.985276279] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_15/cmd_vel (geometry_msgs/msg/Twist) -> /agv_15/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.107631267] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_15/camera/image_raw (gz.msgs.Image) -> /agv_15/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.194938941] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_16/cmd_vel (geometry_msgs/msg/Twist) -> /agv_16/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.218824881] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_16/camera/image_raw (gz.msgs.Image) -> /agv_16/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.264226102] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_17/cmd_vel (geometry_msgs/msg/Twist) -> /agv_17/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.292689678] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_17/camera/image_raw (gz.msgs.Image) -> /agv_17/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.326931118] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_18/cmd_vel (geometry_msgs/msg/Twist) -> /agv_18/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.335400832] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_18/camera/image_raw (gz.msgs.Image) -> /agv_18/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.359803979] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_19/cmd_vel (geometry_msgs/msg/Twist) -> /agv_19/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.385030423] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_19/camera/image_raw (gz.msgs.Image) -> /agv_19/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.430308221] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/agv_20/cmd_vel (geometry_msgs/msg/Twist) -> /agv_20/cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-42] [INFO] [1780539031.455006648] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/agv_20/camera/image_raw (gz.msgs.Image) -> /agv_20/camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[gazebo-1] Escalating to SIGKILL on [Gazebo Sim Server]
+[INFO] [gazebo-1]: process has finished cleanly [pid 16676]
