@@ -80,16 +80,20 @@
       <origin xyz="0 ${y_offset} -0.2" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
     </joint>
+    <gazebo reference="${prefix}_wheel">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
   </xacro:macro>
 
   <xacro:macro name="caster_wheel" params="prefix x_offset y_offset">
     <link name="${prefix}_wheel">
       <visual>
-        <geometry><sphere radius="0.2"/></geometry>
+        <geometry><sphere radius="0.19"/></geometry>
         <material name="pu_orange"><color rgba="1.0 0.4 0.0 1.0"/></material>
       </visual>
       <collision>
-        <geometry><sphere radius="0.2"/></geometry>
+        <geometry><sphere radius="0.19"/></geometry>
       </collision>
       <inertial>
         <mass value="20.0"/>
@@ -101,10 +105,15 @@
       <child link="${prefix}_wheel"/>
       <origin xyz="${x_offset} ${y_offset} -0.2" rpy="0 0 0"/>
     </joint>
+    <gazebo reference="${prefix}_wheel">
+      <mu1>0.0</mu1>
+      <mu2>0.0</mu2>
+    </gazebo>
   </xacro:macro>
 
   <xacro:drive_wheel prefix="drive_left" y_offset="0.45"/>
   <xacro:drive_wheel prefix="drive_right" y_offset="-0.45"/>
+  
   <xacro:caster_wheel prefix="front_left" x_offset="3.0" y_offset="0.45"/>
   <xacro:caster_wheel prefix="front_right" x_offset="3.0" y_offset="-0.45"/>
   <xacro:caster_wheel prefix="rear_left" x_offset="-3.0" y_offset="0.45"/>
@@ -126,7 +135,8 @@
     <sensor name="camera" type="camera">
       <update_rate>10.0</update_rate>
       <camera>
-        <horizontal_fov>2.0</horizontal_fov> <image>
+        <horizontal_fov>2.0</horizontal_fov>
+        <image>
           <width>160</width>
           <height>120</height>
         </image>
@@ -147,10 +157,5 @@
       <topic>/${ns}/joint_states</topic>
     </plugin>
   </gazebo>
-  
-  <gazebo reference="front_left_wheel"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
-  <gazebo reference="front_right_wheel"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
-  <gazebo reference="rear_left_wheel"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
-  <gazebo reference="rear_right_wheel"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
 
 </robot>
