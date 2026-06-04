@@ -49,14 +49,17 @@ class PulseBot(Node):
                 self.get_logger().info(f"[{self.ns}] Docked at Station {self.current_station}")
 
             if not self.arrived:
+                # 1.05 m/s for transit bots, 0.5 m/s for station bots
                 speed = 1.05 if self.current_station >= 12 else 0.5
                 self.twist.linear.x = speed
 
-                # Shifted ROI: Look closer to the robot base to stabilize the massive 7.5m chassis
+                # 1. INCREASED LOOKAHEAD DISTANCE
+                # Shift the ROI slightly higher up the image to anticipate the curve earlier
                 h, w, d = cv_image.shape
-                search_top = int(h * 0.6) 
-                search_bot = h 
+                search_top = int(h * 0.4) # Look further ahead
+                search_bot = int(h * 0.8) # Ignore the chassis hood directly below
                 mask_red[0:search_top, 0:w] = 0
+                mask_red[search_bot:h, 0:w] = 0
 
                 contours, _ = cv2.findContours(mask_red, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
                 if len(contours) > 0:
@@ -66,32 +69,33 @@ class PulseBot(Node):
                         cx = int(M['m10']/M['m00'])
                         error = (w // 2) - cx
                         
-                        # --- 1. ENTERPRISE DYNAMIC GAIN SCHEDULER ---
+                        # --- 2. THE "SOFT CATCH" GAIN SCHEDULER ---
                         if abs(error) < 15:
-                            # Straightaway: Low Steering Effort, MAX Dampening (Shock Absorber)
+                            # Straightaway: Locked in tight.
                             kp = 0.002
                             kd = 0.04
                         else:
-                            # Curve: Aggressive Steering Effort to bite the 10m turn
-                            kp = 0.015
-                            kd = 0.05
+                            # Curve: Smooth, anticipated turn. 
+                            # Dropped Kp to stop the violent whip. Increased Kd to absorb momentum.
+                            kp = 0.006  
+                            kd = 0.08   
                             
                         derivative = error - self.last_error
                         raw_steering = float((error * kp) + (derivative * kd))
                         
-                        # --- 2. ELECTRONIC STEERING DAMPENER (Low-Pass Filter) ---
-                        # Blends 30% new math with 70% physical momentum to stop violent wobbles
-                        alpha = 0.3 
+                        # --- 3. ELECTRONIC STEERING DAMPENER ---
+                        # Blends 20% new math with 80% physical momentum for an ultra-smooth ride
+                        alpha = 0.20 
                         smoothed_steering = (alpha * raw_steering) + ((1.0 - alpha) * self.last_turn)
                         
-                        # --- 3. KINEMATIC CLAMP ---
-                        # Cap max turning velocity so 2,000kg physics don't spin out
-                        self.twist.angular.z = max(min(smoothed_steering, 0.45), -0.45)
+                        # --- 4. KINEMATIC CLAMP ---
+                        # Prevent the wheels from turning faster than the 2000kg chassis can handle
+                        self.twist.angular.z = max(min(smoothed_steering, 0.35), -0.35)
                         
                         self.last_error = error
                         self.last_turn = self.twist.angular.z
                 else:
-                    # Memory Fallback (Hold the steering wheel exactly where it was)
+                    # MEMORY FALLBACK: If blind, hold the exact curve radius!
                     self.twist.angular.z = self.last_turn
             else:
                 self.twist.linear.x = 0.0
@@ -107,6 +111,7 @@ class PulseBot(Node):
 
 def main(args=None):
     rclpy.init(args=args)
+    # Multi-threading to process 20 OpenCV streams simultaneously
     executor = MultiThreadedExecutor(num_threads=20)
     nodes = []
     

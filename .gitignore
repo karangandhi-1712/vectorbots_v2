@@ -1,0 +1,16 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# VS Code specific
+.vscode/*.db
+.vscode/*.db-wal
+.vscode/*.db-shm
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Local system files
+.DS_Store
