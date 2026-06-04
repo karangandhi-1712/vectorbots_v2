@@ -15,3 +15,12 @@ __pycache__/
 # Local system files
 .DS_Store
 
+# VS Code C/C++ Extension caches
+.vscode/browse.vc.db
+.vscode/browse.vc.db-shm
+.vscode/browse.vc.db-wal
+.vscode/browse.vc.db*
+
+
+# Simulation local log outputs
+sim_output.log
