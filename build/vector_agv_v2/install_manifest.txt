@@ -2,6 +2,8 @@
 /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/urdf/vector_v2.urdf.xacro
 /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/worlds/stadium.sdf
 /home/karan/vector_ws_corrected/install/vector_agv_v2/lib/vector_agv_v2/fleet_brain.py
+/home/karan/vector_ws_corrected/install/vector_agv_v2/lib/vector_agv_v2/fleet_brain.py
+/home/karan/vector_ws_corrected/install/vector_agv_v2/lib/vector_agv_v2/swarm_supervisor.py
 /home/karan/vector_ws_corrected/install/vector_agv_v2/share/ament_index/resource_index/package_run_dependencies/vector_agv_v2
 /home/karan/vector_ws_corrected/install/vector_agv_v2/share/ament_index/resource_index/parent_prefix_path/vector_agv_v2
 /home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/environment/ament_prefix_path.sh

@@ -55,6 +55,13 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/vector_agv_v2" TYPE PROGRAM FILES
+    "/home/karan/vector_ws_corrected/src/vector_agv_v2/scripts/fleet_brain.py"
+    "/home/karan/vector_ws_corrected/src/vector_agv_v2/scripts/swarm_supervisor.py"
+    )
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/karan/vector_ws_corrected/build/vector_agv_v2/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/vector_agv_v2")
 endif()
 

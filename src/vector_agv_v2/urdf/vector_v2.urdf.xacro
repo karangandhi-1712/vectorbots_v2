@@ -119,14 +119,14 @@
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin xyz="3.2 0 -0.1" rpy="0 1.5708 0"/>
+    <origin xyz="1.5 0 0.8" rpy="0 1.5708 0"/>
   </joint>
 
   <gazebo reference="camera_link">
     <sensor name="camera" type="camera">
       <update_rate>10.0</update_rate>
       <camera>
-        <image>
+        <horizontal_fov>2.0</horizontal_fov> <image>
           <width>160</width>
           <height>120</height>
         </image>

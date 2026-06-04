@@ -24,4 +24,9 @@ if(BUILD_TESTING)
 endif()
 install(DIRECTORY launch urdf worlds DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS scripts/fleet_brain.py DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS 
+  scripts/fleet_brain.py 
+  scripts/swarm_supervisor.py 
+  DESTINATION lib/${PROJECT_NAME}
+)
 ament_package()
