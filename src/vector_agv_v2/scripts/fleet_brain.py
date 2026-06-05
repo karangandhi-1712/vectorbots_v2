@@ -22,6 +22,9 @@ S0_MAPPING = [
 ]
 
 class FleetBot(Node):
+    # THE GOD-BRAIN: Shared memory across all 20 nodes for absolute collision prevention
+    GLOBAL_S = {i: S0_MAPPING[i] for i in range(20)}
+
     def __init__(self, ns, bot_id):
         super().__init__(f"{ns}_brain")
         self.ns = ns
@@ -34,10 +37,10 @@ class FleetBot(Node):
         self.last_blue = -20.0 
         self.stop_until = 0.0 
         
-        # --- NEW: State Machine & Anti-Lag Boost ---
         self.docking_station = None 
         self.state = "MOVING"
         self.boost_until = 0.0
+        self.is_acc_active = False # Tracks if Virtual Bumper is engaged
         
         self.bridge = CvBridge()
         self.pub = self.create_publisher(Twist, f"/{ns}/cmd_vel", 10)
@@ -47,9 +50,9 @@ class FleetBot(Node):
         self.twist = Twist()
 
     def log_status(self, msg):
-        # STRICT LOG FILTER: We only print for AGV 13, AGV 19, and AGV 20.
-        # Index 12 = agv_13, Index 18 = agv_19, Index 19 = agv_20
-        if self.bot_id in [12, 18, 19]:
+        # STRICT LOG FILTER: Logging for AGV 13, 16, 17, and 20
+        # Indices: 12=AGV_13, 15=AGV_16, 16=AGV_17, 19=AGV_20
+        if self.bot_id in [12, 15, 16, 19]:
             self.get_logger().info(f"[{self.ns}] {msg}")
 
     def image_cb(self, msg):
@@ -59,8 +62,9 @@ class FleetBot(Node):
 
         if (now - self.start_time) < 2.0: return
 
-        # 1. ADVANCE VIRTUAL RAIL POSITION (Dead Reckoning)
+        # 1. ADVANCE VIRTUAL RAIL POSITION & UPDATE GOD-BRAIN
         self.s = (self.s + (self.twist.linear.x * dt)) % TRACK_PERIMETER
+        FleetBot.GLOBAL_S[self.bot_id] = self.s
 
         # 2. THE 3-ZONE DYNAMIC SPEED BRAIN
         if self.s < 180.0:
@@ -68,11 +72,32 @@ class FleetBot(Node):
         elif self.s < 390.0:
             current_cruise = 1.05   # Zone B: High-Speed Transit
         else:
-            # Zone C: Smooth Deceleration from 1.05 to 0.50
             dist_to_zone_a = TRACK_PERIMETER - self.s 
             current_cruise = 0.50 + 0.55 * (dist_to_zone_a / 32.832)
 
-        # 3. STRICT STATION DETECTION (Geographic Gating)
+        # 3. THE SWARM VIRTUAL BUMPER (Collision Prevention)
+        # Identify the robot immediately ahead of us on the loop
+        leader_id = (self.bot_id + 1) % 20
+        leader_s = FleetBot.GLOBAL_S[leader_id]
+        
+        # Calculate true gap, wrapping around the loop perimeter
+        gap = (leader_s - self.s) % TRACK_PERIMETER
+        
+        # If gap < 12m (7.5m chassis + 4.5m safety gap), trigger Adaptive Cruise Control
+        if gap < 12.0:
+            if not self.is_acc_active:
+                self.is_acc_active = True
+                self.log_status(f"!!! VIRTUAL BUMPER ENGAGED !!! Gap to AGV_{leader_id+1:02d} dropped to {gap:.1f}m. Throttling speed.")
+            
+            # Scales speed to 0.0 exactly as the gap hits 8.0 meters (0.5m physical clearance)
+            safety_multiplier = max(0.0, (gap - 8.0) / 4.0)
+            current_cruise = current_cruise * safety_multiplier
+        else:
+            if self.is_acc_active:
+                self.is_acc_active = False
+                self.log_status(f"Track Clear. Gap is {gap:.1f}m. Resuming normal operations.")
+
+        # 4. STRICT STATION DETECTION (Geographic Gating)
         if self.s < 180.0 and self.docking_station is None:
             frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -83,27 +108,24 @@ class FleetBot(Node):
                 projected_s = (self.s + 4.3) % TRACK_PERIMETER
                 self.docking_station = min([7.5 + (i*15.0) for i in range(12)], key=lambda st: abs(st - projected_s))
 
-        # 4. KINEMATIC EXECUTION & STATE MACHINE
+        # 5. KINEMATIC EXECUTION & STATE MACHINE
         if now < self.stop_until:
             if self.state != "STOPPED":
                 self.state = "STOPPED"
-                self.log_status(f"ARRIVED at station {self.s:.1f}m. Physical dead-stop applied. 5-second timer STARTED.")
+                self.log_status(f"DOCKED at station {self.s:.1f}m. 5-second timer STARTED.")
             
-            # Hard Stop at Station
             self.twist.linear.x = 0.0
             self.twist.angular.z = 0.0
         else:
-            # Did we just finish stopping?
             if self.state == "STOPPED":
                 self.state = "MOVING"
-                self.boost_until = now + 1.5  # Give it 1.5 seconds of max torque
-                self.log_status(f"5-second timer UP! Firing Torque-Boost to clear station.")
+                self.boost_until = now + 1.5 
+                self.log_status(f"Timer complete. Firing Diff-Drive Torque Boost to clear station!")
 
-            # DECELERATION LOGIC
             if self.docking_station is not None:
                 if self.state != "BRAKING":
                     self.state = "BRAKING"
-                    self.log_status(f"CAMERA TRIGGERED! 4.3m to Station {self.docking_station:.1f}. Initiating braking glide.")
+                    self.log_status(f"Camera locked onto Station {self.docking_station:.1f}. Initiating glide.")
                 
                 dist_left = self.docking_station - self.s
                 if dist_left < -100.0: dist_left += TRACK_PERIMETER 
@@ -118,11 +140,9 @@ class FleetBot(Node):
                     self.twist.linear.x = min(current_cruise, max(0.2, target_speed))
             else:
                 if self.state == "BRAKING":
-                    self.state = "MOVING" # Failsafe reset
+                    self.state = "MOVING" 
 
-                # ANTI-LAG TORQUE BOOST
-                if now < self.boost_until:
-                    # Request 150% speed for 1.5s to force Gazebo physics to overcome 2000kg inertia
+                if now < self.boost_until and not self.is_acc_active:
                     self.twist.linear.x = current_cruise * 1.5
                 else:
                     self.twist.linear.x = current_cruise
