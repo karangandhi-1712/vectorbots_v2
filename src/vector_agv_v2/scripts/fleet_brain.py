@@ -27,7 +27,7 @@ class FleetBot(Node):
         self.ns = ns
         self.bot_id = bot_id
         
-        self.cruise_speed = 0.50 if self.bot_id < 12 else 1.05
+        # We removed the static cruise_speed. Speed is now dynamically calculated!
         self.s = S0_MAPPING[self.bot_id] 
         
         self.start_time = self.get_clock().now().nanoseconds / 1e9
@@ -35,7 +35,6 @@ class FleetBot(Node):
         self.last_blue = -20.0 
         self.stop_until = 0.0 
         
-        # NEW: Track the station we are braking for
         self.docking_station = None 
         
         self.bridge = CvBridge()
@@ -52,20 +51,32 @@ class FleetBot(Node):
 
         if (now - self.start_time) < 2.0: return
 
-        # 1. ADVANCE VIRTUAL RAIL POSITION (Dead Reckoning stays untouched!)
+        # 1. ADVANCE VIRTUAL RAIL POSITION (Dead Reckoning)
         self.s = (self.s + (self.twist.linear.x * dt)) % TRACK_PERIMETER
 
-        # 2. STATION DETECTION
-        frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        blue = cv2.inRange(hsv, BLUE_LOW, BLUE_HIGH)
+        # --- NEW: THE 3-ZONE DYNAMIC SPEED BRAIN ---
+        if self.s < 180.0:
+            # ZONE A: Station Zone (Bottom Straight). Force 0.50 m/s to prevent rear-ending.
+            current_cruise = 0.50
+        elif self.s < 390.0:
+            # ZONE B: Transit Zone (Right Curve & Top Straight). Accelerate to 1.05 m/s to clear bottlenecks.
+            current_cruise = 1.05
+        else:
+            # ZONE C: Deceleration Zone (Left Curve). s = 390.0 to 422.832
+            # Smoothly ramp down from 1.05 to 0.50 over the final 32.8 meters.
+            dist_to_zone_a = TRACK_PERIMETER - self.s 
+            current_cruise = 0.50 + 0.55 * (dist_to_zone_a / 32.832)
 
-        # Sees blue ~4.3m early. Lowered threshold to 50 for fast bots.
-        if cv2.countNonZero(blue) > 50 and (now - self.last_blue) > 15.0 and self.docking_station is None:
-            self.last_blue = now
-            # Calculate where the camera is looking right now
-            projected_s = (self.s + 4.3) % TRACK_PERIMETER
-            self.docking_station = min([7.5 + (i*15.0) for i in range(12)], key=lambda st: abs(st - projected_s))
+        # 2. STRICT STATION DETECTION (Geographic Gating)
+        if self.s < 180.0 and self.docking_station is None:
+            frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            blue = cv2.inRange(hsv, BLUE_LOW, BLUE_HIGH)
+
+            if cv2.countNonZero(blue) > 50 and (now - self.last_blue) > 15.0:
+                self.last_blue = now
+                projected_s = (self.s + 4.3) % TRACK_PERIMETER
+                self.docking_station = min([7.5 + (i*15.0) for i in range(12)], key=lambda st: abs(st - projected_s))
 
         # 3. KINEMATIC EXECUTION
         if now < self.stop_until:
@@ -73,37 +84,35 @@ class FleetBot(Node):
             self.twist.linear.x = 0.0
             self.twist.angular.z = 0.0
         else:
-            # DECELERATION LOGIC
+            # FINAL DOCKING DECELERATION (Overrides Zone Speed)
             if self.docking_station is not None:
                 dist_left = self.docking_station - self.s
                 
-                # Handle loop wrap-around if bot is at 422m and station is at 7.5m
-                if dist_left < -100.0: 
-                    dist_left += TRACK_PERIMETER 
+                if dist_left < -100.0: dist_left += TRACK_PERIMETER 
                 
                 if dist_left <= 0.05:
-                    # Arrived at center! Trigger 5s stop.
                     self.stop_until = now + 5.0
-                    self.s = self.docking_station  # Anti-drift snap ONLY upon arrival
+                    self.s = self.docking_station  
                     self.docking_station = None
                     self.twist.linear.x = 0.0
                 else:
-                    # Smooth deceleration, capping at 0.15m/s so it doesn't stall infinitely
-                    self.twist.linear.x = max(0.15, self.cruise_speed * (dist_left / 4.3))
+                    target_speed = current_cruise * (dist_left / 4.3)
+                    self.twist.linear.x = min(current_cruise, max(0.2, target_speed))
             else:
-                self.twist.linear.x = self.cruise_speed
+                # Normal driving uses our calculated 3-Zone speed
+                self.twist.linear.x = current_cruise
             
-            # YOUR PERFECT TURN MATH (Untouched)
+            # YOUR PERFECT TURN MATH (Dynamically scales with the 3-Zone speed)
             perfect_turn_velocity = self.twist.linear.x / RADIUS
             
             if self.s < 180.0:
-                self.twist.angular.z = 0.0                   # Bottom Straight
+                self.twist.angular.z = 0.0                   
             elif self.s < 211.416:
-                self.twist.angular.z = perfect_turn_velocity # Right Curve
+                self.twist.angular.z = perfect_turn_velocity 
             elif self.s < 391.416:
-                self.twist.angular.z = 0.0                   # Top Straight
+                self.twist.angular.z = 0.0                   
             else:
-                self.twist.angular.z = perfect_turn_velocity # Left Curve
+                self.twist.angular.z = perfect_turn_velocity 
 
         self.pub.publish(self.twist)
 
