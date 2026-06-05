@@ -27,7 +27,6 @@ class FleetBot(Node):
         self.ns = ns
         self.bot_id = bot_id
         
-        # We removed the static cruise_speed. Speed is now dynamically calculated!
         self.s = S0_MAPPING[self.bot_id] 
         
         self.start_time = self.get_clock().now().nanoseconds / 1e9
@@ -35,7 +34,10 @@ class FleetBot(Node):
         self.last_blue = -20.0 
         self.stop_until = 0.0 
         
+        # --- NEW: State Machine & Anti-Lag Boost ---
         self.docking_station = None 
+        self.state = "MOVING"
+        self.boost_until = 0.0
         
         self.bridge = CvBridge()
         self.pub = self.create_publisher(Twist, f"/{ns}/cmd_vel", 10)
@@ -43,6 +45,12 @@ class FleetBot(Node):
             Image, f"/{ns}/camera/image_raw", self.image_cb, qos_profile_sensor_data)
         
         self.twist = Twist()
+
+    def log_status(self, msg):
+        # STRICT LOG FILTER: We only print for AGV 13, AGV 19, and AGV 20.
+        # Index 12 = agv_13, Index 18 = agv_19, Index 19 = agv_20
+        if self.bot_id in [12, 18, 19]:
+            self.get_logger().info(f"[{self.ns}] {msg}")
 
     def image_cb(self, msg):
         now = self.get_clock().now().nanoseconds / 1e9
@@ -54,20 +62,17 @@ class FleetBot(Node):
         # 1. ADVANCE VIRTUAL RAIL POSITION (Dead Reckoning)
         self.s = (self.s + (self.twist.linear.x * dt)) % TRACK_PERIMETER
 
-        # --- NEW: THE 3-ZONE DYNAMIC SPEED BRAIN ---
+        # 2. THE 3-ZONE DYNAMIC SPEED BRAIN
         if self.s < 180.0:
-            # ZONE A: Station Zone (Bottom Straight). Force 0.50 m/s to prevent rear-ending.
-            current_cruise = 0.50
+            current_cruise = 0.50   # Zone A: Station Crawl
         elif self.s < 390.0:
-            # ZONE B: Transit Zone (Right Curve & Top Straight). Accelerate to 1.05 m/s to clear bottlenecks.
-            current_cruise = 1.05
+            current_cruise = 1.05   # Zone B: High-Speed Transit
         else:
-            # ZONE C: Deceleration Zone (Left Curve). s = 390.0 to 422.832
-            # Smoothly ramp down from 1.05 to 0.50 over the final 32.8 meters.
+            # Zone C: Smooth Deceleration from 1.05 to 0.50
             dist_to_zone_a = TRACK_PERIMETER - self.s 
             current_cruise = 0.50 + 0.55 * (dist_to_zone_a / 32.832)
 
-        # 2. STRICT STATION DETECTION (Geographic Gating)
+        # 3. STRICT STATION DETECTION (Geographic Gating)
         if self.s < 180.0 and self.docking_station is None:
             frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -78,16 +83,29 @@ class FleetBot(Node):
                 projected_s = (self.s + 4.3) % TRACK_PERIMETER
                 self.docking_station = min([7.5 + (i*15.0) for i in range(12)], key=lambda st: abs(st - projected_s))
 
-        # 3. KINEMATIC EXECUTION
+        # 4. KINEMATIC EXECUTION & STATE MACHINE
         if now < self.stop_until:
+            if self.state != "STOPPED":
+                self.state = "STOPPED"
+                self.log_status(f"ARRIVED at station {self.s:.1f}m. Physical dead-stop applied. 5-second timer STARTED.")
+            
             # Hard Stop at Station
             self.twist.linear.x = 0.0
             self.twist.angular.z = 0.0
         else:
-            # FINAL DOCKING DECELERATION (Overrides Zone Speed)
+            # Did we just finish stopping?
+            if self.state == "STOPPED":
+                self.state = "MOVING"
+                self.boost_until = now + 1.5  # Give it 1.5 seconds of max torque
+                self.log_status(f"5-second timer UP! Firing Torque-Boost to clear station.")
+
+            # DECELERATION LOGIC
             if self.docking_station is not None:
-                dist_left = self.docking_station - self.s
+                if self.state != "BRAKING":
+                    self.state = "BRAKING"
+                    self.log_status(f"CAMERA TRIGGERED! 4.3m to Station {self.docking_station:.1f}. Initiating braking glide.")
                 
+                dist_left = self.docking_station - self.s
                 if dist_left < -100.0: dist_left += TRACK_PERIMETER 
                 
                 if dist_left <= 0.05:
@@ -99,10 +117,17 @@ class FleetBot(Node):
                     target_speed = current_cruise * (dist_left / 4.3)
                     self.twist.linear.x = min(current_cruise, max(0.2, target_speed))
             else:
-                # Normal driving uses our calculated 3-Zone speed
-                self.twist.linear.x = current_cruise
+                if self.state == "BRAKING":
+                    self.state = "MOVING" # Failsafe reset
+
+                # ANTI-LAG TORQUE BOOST
+                if now < self.boost_until:
+                    # Request 150% speed for 1.5s to force Gazebo physics to overcome 2000kg inertia
+                    self.twist.linear.x = current_cruise * 1.5
+                else:
+                    self.twist.linear.x = current_cruise
             
-            # YOUR PERFECT TURN MATH (Dynamically scales with the 3-Zone speed)
+            # YOUR PERFECT TURN MATH
             perfect_turn_velocity = self.twist.linear.x / RADIUS
             
             if self.s < 180.0:
@@ -129,4 +154,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-
