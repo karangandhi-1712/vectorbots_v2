@@ -66,10 +66,115 @@
     <model name="station_11"><static>true</static><pose>67.5 -10 0.005 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>1 1 0.001</size></box></geometry><material><ambient>0 0.5 1 1</ambient><diffuse>0 0.5 1 1</diffuse></material></visual></link></model>
     <model name="station_12"><static>true</static><pose>82.5 -10 0.005 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>1 1 0.001</size></box></geometry><material><ambient>0 0.5 1 1</ambient><diffuse>0 0.5 1 1</diffuse></material></visual></link></model>
 
-    <model name="wall_north"><static>true</static><pose>0 20 1.5 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>220 0.5 3</size></box></geometry><material><ambient>0.6 0.3 0.2 1</ambient><diffuse>0.6 0.3 0.2 1</diffuse></material></visual></link></model>
-    <model name="wall_south"><static>true</static><pose>0 -20 1.5 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>220 0.5 3</size></box></geometry><material><ambient>0.6 0.3 0.2 1</ambient><diffuse>0.6 0.3 0.2 1</diffuse></material></visual></link></model>
-    <model name="wall_east"><static>true</static><pose>110 0 1.5 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>0.5 40 3</size></box></geometry><material><ambient>0.6 0.3 0.2 1</ambient><diffuse>0.6 0.3 0.2 1</diffuse></material></visual></link></model>
-    <model name="wall_west"><static>true</static><pose>-110 0 1.5 0 0 0</pose><link name="link"><visual name="visual"><geometry><box><size>0.5 40 3</size></box></geometry><material><ambient>0.6 0.3 0.2 1</ambient><diffuse>0.6 0.3 0.2 1</diffuse></material></visual></link></model>
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 20 6.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>220 0.5 12</size></box></geometry>
+          <material>
+            <ambient>0.55 0.25 0.15 1</ambient>
+            <diffuse>0.55 0.25 0.15 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>220 0.5 12</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -20 6.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>220 0.5 12</size></box></geometry>
+          <material>
+            <ambient>0.55 0.25 0.15 1</ambient>
+            <diffuse>0.55 0.25 0.15 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>220 0.5 12</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <pose>110 0 6.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.5 40 12</size></box></geometry>
+          <material>
+            <ambient>0.55 0.25 0.15 1</ambient>
+            <diffuse>0.55 0.25 0.15 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.5 40 12</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-110 0 6.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.5 40 12</size></box></geometry>
+          <material>
+            <ambient>0.55 0.25 0.15 1</ambient>
+            <diffuse>0.55 0.25 0.15 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.5 40 12</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="warehouse_roof_north">
+      <static>true</static>
+      <pose>0 10.0 15.0 -0.291 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>222 21.5 0.2</size></box></geometry>
+          <material>
+            <ambient>0.25 0.3 0.35 1</ambient>
+            <diffuse>0.25 0.3 0.35 1</diffuse>
+            <specular>0.4 0.4 0.4 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>222 21.5 0.2</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="warehouse_roof_south">
+      <static>true</static>
+      <pose>0 -10.0 15.0 0.291 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>222 21.5 0.2</size></box></geometry>
+          <material>
+            <ambient>0.25 0.3 0.35 1</ambient>
+            <diffuse>0.25 0.3 0.35 1</diffuse>
+            <specular>0.4 0.4 0.4 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>222 21.5 0.2</size></box></geometry>
+        </collision>
+      </link>
+    </model>
 
     <!-- shelf_big_movai replacing storage_rack_1 -->
 <include>
@@ -99,5 +204,21 @@
   <pose>-50 -15 0 0 0 1.5708</pose>
   <static>true</static>
 </include>
+
+
+<include>
+  <uri>file:///home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/models/shelf_big_movai</uri>
+  <name>shelf_rack_5</name>
+  <pose>98 15 0 0 0 1.5708</pose>
+  <static>true</static>
+</include>
+
+<include>
+  <uri>file:///home/karan/vector_ws_corrected/install/vector_agv_v2/share/vector_agv_v2/models/shelf_big_movai</uri>
+  <name>shelf_rack_6</name>
+  <pose>-98 15 0 0 0 1.5708</pose>
+  <static>true</static>
+</include>
+  
   </world>
 </sdf>
