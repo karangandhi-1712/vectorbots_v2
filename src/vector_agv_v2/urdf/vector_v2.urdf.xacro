@@ -5,18 +5,41 @@
   <xacro:property name="ns" value="$(arg namespace)"/>
   <xacro:property name="payload_mass" value="2000.0"/>
 
-  <material name="heavy_orange">
-    <color rgba="1.0 0.45 0.0 1.0"/>
-  </material>
-  <material name="steel">
-    <color rgba="0.6 0.6 0.65 1.0"/>
-  </material>
+  <material name="heavy_orange"><color rgba="1.0 0.45 0.0 1.0"/></material>
+  <material name="steel"><color rgba="0.6 0.6 0.65 1.0"/></material>
+  <material name="industrial_black"><color rgba="0.1 0.1 0.1 1.0"/></material>
+  <material name="headlight_white"><color rgba="1.0 1.0 1.0 1.0"/></material>
+  <material name="taillight_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
 
   <link name="base_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><box size="7.5 1.3 0.25"/></geometry>
       <material name="heavy_orange"/>
+    </visual>
+
+    <visual>
+      <origin xyz="3.76 0.45 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.25 0.08"/></geometry>
+      <material name="headlight_white"/>
+    </visual>
+
+    <visual>
+      <origin xyz="3.76 -0.45 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.25 0.08"/></geometry>
+      <material name="headlight_white"/>
+    </visual>
+
+    <visual>
+      <origin xyz="-3.76 0.45 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.25 0.08"/></geometry>
+      <material name="taillight_red"/>
+    </visual>
+
+    <visual>
+      <origin xyz="-3.76 -0.45 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.25 0.08"/></geometry>
+      <material name="taillight_red"/>
     </visual>
 
     <collision>
@@ -100,6 +123,7 @@
         izz="${(payload_mass/12.0) * (7.0*7.0 + 1.5*1.5)}"/>
     </inertial>
   </link>
+  
   <joint name="payload_joint" type="fixed">
     <parent link="base_link"/>
     <child link="payload_link"/>
@@ -111,7 +135,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry><cylinder radius="0.2" length="0.1"/></geometry>
-        <material name="pu_orange"><color rgba="1.0 0.4 0.0 1.0"/></material>
+        <material name="industrial_black"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
@@ -131,6 +155,7 @@
     <gazebo reference="${prefix}_wheel">
       <mu1>1.0</mu1>
       <mu2>1.0</mu2>
+      <material>Gazebo/DarkGrey</material> 
     </gazebo>
   </xacro:macro>
 
@@ -138,7 +163,7 @@
     <link name="${prefix}_wheel">
       <visual>
         <geometry><sphere radius="0.19"/></geometry>
-        <material name="pu_orange"><color rgba="1.0 0.4 0.0 1.0"/></material>
+        <material name="industrial_black"/>
       </visual>
       <collision>
         <geometry><sphere radius="0.19"/></geometry>
@@ -156,6 +181,7 @@
     <gazebo reference="${prefix}_wheel">
       <mu1>0.0</mu1>
       <mu2>0.0</mu2>
+      <material>Gazebo/DarkGrey</material>
     </gazebo>
   </xacro:macro>
 
