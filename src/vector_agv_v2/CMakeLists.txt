@@ -24,11 +24,13 @@ install(DIRECTORY
 install(DIRECTORY models/
   DESTINATION share/${PROJECT_NAME}/models
 )
-# Install Python executables
+
+# UPDATED: Added workcell_brain.py to the list
 install(PROGRAMS 
   scripts/fleet_brain.py 
   scripts/single_brain.py 
   scripts/swarm_supervisor.py 
+  scripts/workcell_brain.py 
   DESTINATION lib/${PROJECT_NAME}
 )
 
